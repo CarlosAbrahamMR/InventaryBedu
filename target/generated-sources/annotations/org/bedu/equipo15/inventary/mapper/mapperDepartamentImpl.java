@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2023-12-13T12:31:39-0600",
+    date = "2023-12-13T15:46:19-0600",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 17.0.9 (Amazon.com Inc.)"
 )
 @Component
@@ -56,5 +56,20 @@ public class mapperDepartamentImpl implements mapperDepartament {
         if ( dto.getPhone() != null ) {
             model.setPhone( dto.getPhone() );
         }
+    }
+
+    @Override
+    public Departament toModelAdd(dtoDepartament dto) {
+        if ( dto == null ) {
+            return null;
+        }
+
+        Departament departament = new Departament();
+
+        departament.setId( dto.getId() );
+        departament.setName( dto.getName() );
+        departament.setPhone( dto.getPhone() );
+
+        return departament;
     }
 }

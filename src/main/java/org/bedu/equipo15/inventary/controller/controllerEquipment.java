@@ -1,15 +1,13 @@
 package org.bedu.equipo15.inventary.controller;
 
 import jakarta.validation.Valid;
-import org.bedu.equipo15.inventary.dto.dtoAddEquipment;
-import org.bedu.equipo15.inventary.dto.dtoDepartament;
-import org.bedu.equipo15.inventary.dto.dtoEquipment;
+import org.bedu.equipo15.inventary.dto.*;
+import org.bedu.equipo15.inventary.exception.NotFoundException;
 import org.bedu.equipo15.inventary.model.Departament;
 import org.bedu.equipo15.inventary.service.serviceEquipment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.bedu.equipo15.inventary.dto.dtoEquipmentCreate;
 
 import java.util.List;
 
@@ -33,15 +31,20 @@ public class controllerEquipment {
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable long id) {
+    public void delete(@PathVariable long id) throws NotFoundException {
         service.deleteById(id);
+    }
+    @PutMapping("{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void update(@PathVariable long id, @Valid @RequestBody dtoUpdateEquipment data) throws NotFoundException {
+        service.update(id, data);
     }
 
     @PostMapping("/{equipmentId}/assignEquipment")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void assignEquipment(
             @PathVariable long equipmentId,
-            @RequestBody Departament departamentdto) {
+            @RequestBody dtoDepartament departamentdto) throws NotFoundException {
         {
             service.assignEquipment(equipmentId, departamentdto);
 

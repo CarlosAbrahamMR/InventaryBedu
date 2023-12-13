@@ -20,4 +20,6 @@ public interface mapperDepartament {
 
     @Mapping(target = "id", ignore = true)
     void update(@MappingTarget Departament model, dtoUpdateDepartament dto);
+    @Mapping(target = "equipment", ignore = true) // Avoid circular dependency
+    Departament toModelAdd(dtoDepartament dto);
 }

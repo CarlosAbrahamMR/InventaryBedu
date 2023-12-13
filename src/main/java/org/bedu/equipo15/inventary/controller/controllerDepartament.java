@@ -2,6 +2,7 @@ package org.bedu.equipo15.inventary.controller;
 
 import jakarta.validation.Valid;
 import org.bedu.equipo15.inventary.dto.*;
+import org.bedu.equipo15.inventary.exception.NotFoundException;
 import org.bedu.equipo15.inventary.model.Equipment;
 import org.bedu.equipo15.inventary.service.serviceDepartament;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,21 +32,16 @@ public class controllerDepartament {
 
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable long id, @Valid @RequestBody dtoUpdateDepartament data)  {
+    public void update(@PathVariable long id, @Valid @RequestBody dtoUpdateDepartament data) throws NotFoundException {
         service.update(id, data);
     }
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable long id) {
+    public void delete(@PathVariable long id) throws NotFoundException {
         service.deleteById(id);
     }
 
-    @GetMapping("{departamentId}/equipments")
-    @ResponseStatus(HttpStatus.OK)
-    public List<Equipment> findSongsByArtist(@PathVariable long departamentId) {
-        return service.findEquipmentByDepartament(departamentId);
 
-    }
 }
 

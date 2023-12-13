@@ -4,6 +4,7 @@ import org.bedu.equipo15.inventary.dto.dtoAddEquipment;
 import org.bedu.equipo15.inventary.dto.dtoDepartament;
 import org.bedu.equipo15.inventary.dto.dtoDepartamentCreate;
 import org.bedu.equipo15.inventary.dto.dtoUpdateDepartament;
+import org.bedu.equipo15.inventary.exception.NotFoundException;
 import org.bedu.equipo15.inventary.mapper.mapperDepartament;
 import org.bedu.equipo15.inventary.model.Departament;
 import org.bedu.equipo15.inventary.model.Equipment;
@@ -36,11 +37,11 @@ public class serviceDepartament {
     }
 
 
-    public void update(long id, dtoUpdateDepartament data) {
+    public void update(long id, dtoUpdateDepartament data) throws NotFoundException {
         Optional<Departament> result = repository.findById(id);
 
         if (result.isEmpty()) {
-            // throw new PacientNotFoundException(id);
+             throw new NotFoundException(id);
         }
 
         Departament model = result.get();
@@ -50,21 +51,16 @@ public class serviceDepartament {
         repository.save(model);
     }
 
-    public void deleteById(long id) {
+    public void deleteById(long id) throws NotFoundException {
+
+        if (!repository.existsById(id)) {
+            throw new NotFoundException(id);
+        }
+
         repository.deleteById(id);
+
     }
 
 
-    public List<Equipment> findEquipmentByDepartament(Long departmentId) {
 
-        Optional<Departament> departament = repository.findById(departmentId);
-
-
-         departament = repository.findById(departmentId);
-
-            //.orElseThrow(() -> new EntityNotFoundException("Department no encontrado con ID: " + departmentId));
-
-    // Obtener todos los equipos vinculados al departamento
-        return repositoryEquipment.findAllByDepartamentId(departmentId);
-}
 }

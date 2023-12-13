@@ -17,7 +17,7 @@ import java.util.Set;
 @Table(name="Departament")
 public class Departament {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false)
@@ -26,6 +26,6 @@ public class Departament {
     @Column(nullable = false)
     private String phone;
 
-    @OneToMany(mappedBy = "departament", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "departament", cascade = CascadeType.ALL,fetch = FetchType.LAZY)
     private List<Equipment> equipment;
 }

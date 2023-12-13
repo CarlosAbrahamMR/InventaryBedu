@@ -41,7 +41,7 @@ public class controllerEquipment {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void assignEquipment(
             @PathVariable long equipmentId,
-            @RequestBody Departament departamentdto) {
+            @RequestBody dtoDepartament departamentdto) {
         {
             service.assignEquipment(equipmentId, departamentdto);
 

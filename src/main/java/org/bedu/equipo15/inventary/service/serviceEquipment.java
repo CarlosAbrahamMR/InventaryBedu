@@ -2,12 +2,15 @@ package org.bedu.equipo15.inventary.service;
 
 import org.bedu.equipo15.inventary.dto.*;
 import org.bedu.equipo15.inventary.mapper.mapperAddEquipment;
+import org.bedu.equipo15.inventary.mapper.mapperDepartament;
 import org.bedu.equipo15.inventary.mapper.mapperEquipment;
 import org.bedu.equipo15.inventary.model.Departament;
 import org.bedu.equipo15.inventary.model.Equipment;
+import org.bedu.equipo15.inventary.repository.repositoryDepartament;
 import org.bedu.equipo15.inventary.repository.repositoryEquipment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,9 +20,11 @@ public class serviceEquipment {
     @Autowired
     private mapperEquipment mapper;
     @Autowired
-    private mapperAddEquipment Addmapper;
-    @Autowired
     private repositoryEquipment repository;
+    @Autowired
+    private org.bedu.equipo15.inventary.mapper.mapperDepartament mapperDepartament;
+    @Autowired
+    private org.bedu.equipo15.inventary.repository.repositoryDepartament repositoryDepartament;
 
     public List<dtoEquipment> findAll(){
 
@@ -53,16 +58,27 @@ public class serviceEquipment {
         repository.deleteById(id);
     }
 
-    public void assignEquipment(long equipmentId, Departament departament) {
+    @Transactional
+    public void assignEquipment(long equipmentId, dtoDepartament departamentdto) {
         Optional<Equipment> equipmentOptional = repository.findById(equipmentId);
+
         if (equipmentOptional.isPresent()) {
-            Equipment model = equipmentOptional.get();
-            model.setDepartament(departament);
+            Equipment equipment = equipmentOptional.get();
 
-            // Acceder a la relación para evitar problemas de carga perezosa
-            departament.getEquipment().add(model);
+            // Map your DTO to the Departament entity using your mapper
+            Departament departament = mapperDepartament.toModelAdd(departamentdto);
 
-            repository.save(model);
+            // Save the departament
+            Departament savedDepartament = repositoryDepartament.save(departament);
+
+            // Set the relationship between departament and equipment
+            equipment.setDepartament(savedDepartament);
+
+            // Save the equipment entity
+            repository.save(equipment);
+        } else {
+            // Handle the case where equipment is not found
+            // You might want to throw an exception or handle it according to your application logic
         }
     }
 }

@@ -29,8 +29,6 @@ public class controllerDepartament {
         return service.save(data);
     }
 
-
-
     @PutMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@PathVariable long id, @Valid @RequestBody dtoUpdateDepartament data)  {

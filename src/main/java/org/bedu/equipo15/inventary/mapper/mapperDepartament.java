@@ -6,13 +6,10 @@ import org.bedu.equipo15.inventary.dto.dtoEquipment;
 import org.bedu.equipo15.inventary.dto.dtoUpdateDepartament;
 import org.bedu.equipo15.inventary.model.Departament;
 import org.bedu.equipo15.inventary.model.Equipment;
-import org.mapstruct.InjectionStrategy;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.MappingTarget;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel = "spring",injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface mapperDepartament {
 
 

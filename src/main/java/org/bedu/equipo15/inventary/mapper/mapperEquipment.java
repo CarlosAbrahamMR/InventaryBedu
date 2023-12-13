@@ -8,7 +8,7 @@ import org.bedu.equipo15.inventary.model.Departament;
 import org.bedu.equipo15.inventary.model.Equipment;
 import org.mapstruct.*;
 
-@Mapper(componentModel = "spring",injectionStrategy = InjectionStrategy.CONSTRUCTOR)
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR, nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface mapperEquipment {
     dtoEquipment toDTO(Equipment model);
 

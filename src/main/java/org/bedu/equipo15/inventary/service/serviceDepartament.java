@@ -37,19 +37,20 @@ public class serviceDepartament {
     }
 
 
-    public void update(long id, dtoUpdateDepartament data) throws NotFoundException {
+    public Departament update(long id, dtoUpdateDepartament data) throws NotFoundException {
         Optional<Departament> result = repository.findById(id);
 
         if (result.isEmpty()) {
-             throw new NotFoundException(id);
+            throw new NotFoundException(id);
         }
 
         Departament model = result.get();
 
         mapper.update(model, data);
 
-        repository.save(model);
+        return repository.save(model);
     }
+
 
     public void deleteById(long id) throws NotFoundException {
 
@@ -60,7 +61,4 @@ public class serviceDepartament {
         repository.deleteById(id);
 
     }
-
-
-
 }

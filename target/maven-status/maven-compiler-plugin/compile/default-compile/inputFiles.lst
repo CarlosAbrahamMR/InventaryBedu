@@ -1,6 +1,7 @@
 D:\EliasGijon\PortafolioTecnico\InventaryBedu\src\main\java\org\bedu\equipo15\inventary\exception\RuntimeException.java
 D:\EliasGijon\PortafolioTecnico\InventaryBedu\src\main\java\org\bedu\equipo15\inventary\mapper\mapperAddEquipment.java
 D:\EliasGijon\PortafolioTecnico\InventaryBedu\src\main\java\org\bedu\equipo15\inventary\service\serviceEquipment.java
+D:\EliasGijon\PortafolioTecnico\InventaryBedu\src\main\java\org\bedu\equipo15\inventary\advice\OpenApi.java
 D:\EliasGijon\PortafolioTecnico\InventaryBedu\src\main\java\org\bedu\equipo15\inventary\dto\dtoAdvice.java
 D:\EliasGijon\PortafolioTecnico\InventaryBedu\src\main\java\org\bedu\equipo15\inventary\dto\dtoUpdateDepartament.java
 D:\EliasGijon\PortafolioTecnico\InventaryBedu\src\main\java\org\bedu\equipo15\inventary\mapper\mapperEquipment.java

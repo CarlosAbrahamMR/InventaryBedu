@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.bedu.equipo15.inventary.dto.*;
 import org.bedu.equipo15.inventary.exception.NotFoundException;
+import org.bedu.equipo15.inventary.model.Departament;
 import org.bedu.equipo15.inventary.model.Equipment;
 import org.bedu.equipo15.inventary.service.serviceDepartament;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,10 +34,10 @@ public class controllerDepartament {
         return service.save(data);
     }
     @Operation(summary = "Actualizar la información de un departamento")
-    @PutMapping("{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@PathVariable long id, @Valid @RequestBody dtoUpdateDepartament data) throws NotFoundException {
-        service.update(id, data);
+    @PatchMapping("{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Departament update(@PathVariable long id, @Valid @RequestBody dtoUpdateDepartament data) throws NotFoundException {
+        return service.update(id, data);
     }
     @Operation(summary = "Eliminar un departamento por ID")
     @DeleteMapping("{id}")
@@ -44,7 +45,5 @@ public class controllerDepartament {
     public void delete(@PathVariable long id) throws NotFoundException {
         service.deleteById(id);
     }
-
-
 }
 
